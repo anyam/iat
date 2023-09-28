@@ -3,7 +3,7 @@ title: ""
 author: ""
 format:
   md:
-    output-file: gggg.md
+    output-file: ggggg.md
 ---
 # Лабораторная работа №1
 
