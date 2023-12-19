@@ -141,15 +141,71 @@ weather %>% ncol ()
 
 #### 4. Как просмотреть примерный вид датафреймов?
 
+С помощью команды функции glimpse()
+
+``` r
+airlines %>% glimpse()
+```
+
+    Rows: 16
+    Columns: 2
+    $ carrier <chr> "9E", "AA", "AS", "B6", "DL", "EV", "F9", "FL", "HA", "MQ", "O…
+    $ name    <chr> "Endeavor Air Inc.", "American Airlines Inc.", "Alaska Airline…
+
 #### 5. Сколько компаний-перевозчиков (carrier) учитывают эти наборы данных (представлено в наборах данных)?
+
+``` r
+airlines %>%
+  nrow()
+```
+
+    [1] 16
 
 #### 6. Сколько рейсов принял аэропорт John F Kennedy Intl в мае?
 
+``` r
+flights %>% filter (origin=='JFK', month==5) %>% nrow()
+```
+
+    [1] 9397
+
 #### 7. Какой самый северный аэропорт?
+
+``` r
+airports %>% filter(lat == max(lat))
+```
+
+    # A tibble: 1 × 8
+      faa   name                      lat   lon   alt    tz dst   tzone
+      <chr> <chr>                   <dbl> <dbl> <dbl> <dbl> <chr> <chr>
+    1 EEN   Dillant Hopkins Airport  72.3  42.9   149    -5 A     <NA> 
 
 #### 8. Какой аэропорт самый высокогорный (находится выше всех над уровнем моря)?
 
+``` r
+airports %>% 
+  filter(alt == max(alt))
+```
+
+    # A tibble: 1 × 8
+      faa   name        lat   lon   alt    tz dst   tzone         
+      <chr> <chr>     <dbl> <dbl> <dbl> <dbl> <chr> <chr>         
+    1 TEX   Telluride  38.0 -108.  9078    -7 A     America/Denver
+
 #### 9. Какие бортовые номера у самых старых самолётов?
+
+``` r
+planes %>% arrange(year) %>% select(tailnum) %>% head(5)
+```
+
+    # A tibble: 5 × 1
+      tailnum
+      <chr>  
+    1 N381AA 
+    2 N201AA 
+    3 N567AA 
+    4 N378AA 
+    5 N575AA 
 
 #### 10. Какая средняя температура воздуха была в сентябре в аэропорту John F Kennedy Intl (в градусах Цельсия)?
 
