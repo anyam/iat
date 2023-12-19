@@ -10,8 +10,8 @@
     для обработки данных;
 2.  Закрепить знания базовых типов данных языка R;
 3.  Развить пркатические навыки использования функций обработки данных
-    пакета dplyr – функции `select()`, `filter()`, `mutate()`,
-    `arrange()`, `group_by()`.
+    пакета dplyr – функции `select ()`, `filter ()`, `mutate ()`,
+    `arrange ()`, `group_by ()`.
 
 ## Исходные данные
 
@@ -30,14 +30,14 @@
 
 ### Шаг 0
 
-Установка пакета `dplyr` с помощью команды `install.packages("dplyr")`.
+Установка пакета `dplyr` с помощью команды `install.packages ("dplyr")`.
 
-    install.packages("dplyr")
+    install.packages ("dplyr")
 
-Подключение пакета к проекту с помощью команды мощью `library(dplyr)`.
+Подключение пакета к проекту с помощью команды мощью `library (dplyr)`.
 
 ``` r
-library(dplyr)
+library (dplyr)
 ```
 
     Warning: package 'dplyr' was built under R version 4.3.2
@@ -58,7 +58,7 @@ library(dplyr)
 #### 1. Сколько строк в датафрейме?
 
 ``` r
-starwars %>% nrow()
+starwars %>% nrow ()
 ```
 
     [1] 87
@@ -66,7 +66,7 @@ starwars %>% nrow()
 #### 2. Сколько столбцов в датафрейме?
 
 ``` r
-starwars %>% ncol()
+starwars %>% ncol ()
 ```
 
     [1] 14
@@ -74,7 +74,7 @@ starwars %>% ncol()
 #### 3. Как просмотреть примерный вид датафрейма?
 
 ``` r
-starwars %>% glimpse()
+starwars %>% glimpse ()
 ```
 
     Rows: 87
@@ -97,8 +97,8 @@ starwars %>% glimpse()
 #### 4. Сколько уникальных рас персонажей (species) представлено в данных?
 
 ``` r
-starwars %>% select(species) %>% 
-  unique()
+starwars %>% select (species) %>% 
+  unique ()
 ```
 
     # A tibble: 38 × 1
@@ -119,8 +119,8 @@ starwars %>% select(species) %>%
 #### 5. Найти самого высокого персонажа.
 
 ``` r
-starwars %>% filter(height == max(height, na.rm = TRUE)) %>% 
-  select(name, height)
+starwars %>% filter (height == max(height, na.rm = TRUE)) %>% 
+  select (name, height)
 ```
 
     # A tibble: 1 × 2
@@ -130,7 +130,35 @@ starwars %>% filter(height == max(height, na.rm = TRUE)) %>%
 
 #### 6. Найти всех персонажей ниже 170
 
+``` r
+starwars %>% filter (height == max (height, na.rm = TRUE)) %>% select (name, height)
+```
+
+    # A tibble: 1 × 2
+      name        height
+      <chr>        <int>
+    1 Yarael Poof    264
+
 #### 7. Подсчитать ИМТ (индекс массы тела) для всех персонажей. ИМТ подсчитать по формуле I = m/h^2 , где m – масса (weight), а h – рост (height).
+
+``` r
+starwars %>% mutate (BMI = mass / ((height / 100) ^ 2)) %>% select (name, BMI)
+```
+
+    # A tibble: 87 × 2
+       name                 BMI
+       <chr>              <dbl>
+     1 Luke Skywalker      26.0
+     2 C-3PO               26.9
+     3 R2-D2               34.7
+     4 Darth Vader         33.3
+     5 Leia Organa         21.8
+     6 Owen Lars           37.9
+     7 Beru Whitesun Lars  27.5
+     8 R5-D4               34.0
+     9 Biggs Darklighter   25.1
+    10 Obi-Wan Kenobi      23.2
+    # ℹ 77 more rows
 
 #### 8. Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по отношению массы (mass) к росту (height) персонажей.
 
