@@ -142,11 +142,11 @@ starwars %>% filter (height == max (height, na.rm = TRUE)) %>% select (name, hei
 #### 7. Подсчитать ИМТ (индекс массы тела) для всех персонажей. ИМТ подсчитать по формуле I = m/h^2 , где m – масса (weight), а h – рост (height).
 
 ``` r
-starwars %>% mutate (BMI = mass / ((height / 100) ^ 2)) %>% select (name, BMI)
+starwars %>% mutate (bmi = mass / ((height / 100) ^ 2)) %>% select (name, bmi)
 ```
 
     # A tibble: 87 × 2
-       name                 BMI
+       name                 bmi
        <chr>              <dbl>
      1 Luke Skywalker      26.0
      2 C-3PO               26.9
@@ -162,7 +162,44 @@ starwars %>% mutate (BMI = mass / ((height / 100) ^ 2)) %>% select (name, BMI)
 
 #### 8. Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по отношению массы (mass) к росту (height) персонажей.
 
+``` r
+starwars %>% mutate (longest = mass / height) %>% arrange (desc (longest)) %>% head (10) %>% select (name, longest)
+```
+
+    # A tibble: 10 × 2
+       name                  longest
+       <chr>                   <dbl>
+     1 Jabba Desilijic Tiure   7.76 
+     2 Grievous                0.736
+     3 IG-88                   0.7  
+     4 Owen Lars               0.674
+     5 Darth Vader             0.673
+     6 Jek Tono Porkins        0.611
+     7 Bossk                   0.595
+     8 Tarfful                 0.581
+     9 Dexter Jettster         0.515
+    10 Chewbacca               0.491
+
 #### 9. Найти средний возраст персонажей каждой расы вселенной Звёздных войн
+
+``` r
+starwars %>% group_by (species) %>% summarise (mean (birth_year, na.rm = TRUE))
+```
+
+    # A tibble: 38 × 2
+       species   `mean(birth_year, na.rm = TRUE)`
+       <chr>                                <dbl>
+     1 Aleena                               NaN  
+     2 Besalisk                             NaN  
+     3 Cerean                                92  
+     4 Chagrian                             NaN  
+     5 Clawdite                             NaN  
+     6 Droid                                 53.3
+     7 Dug                                  NaN  
+     8 Ewok                                   8  
+     9 Geonosian                            NaN  
+    10 Gungan                                52  
+    # ℹ 28 more rows
 
 #### 10. Найти самый распространённый цвет глаз персонажей вселенной Звёздных войн
 
