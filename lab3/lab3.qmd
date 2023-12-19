@@ -141,4 +141,11 @@ flights %>% group_by (carrier) %>% filter (month == 6) %>%  summarize (flights =
 flights %>% group_by (carrier) %>% filter (year == 2013)  %>% summarize (times = sum (arr_delay > 0, na.rm = TRUE)) %>% arrange (desc (times)) %>% head (1)
 ```
 
+## Оценка результата
+Установлен пакеты dplyr и nycflights13. 
+Получены ответы на вопросы задания.
+Проведена работа с использованием функций пакета dplyr и датафреймов пакета nycflights13.
 
+
+## Вывод
+Изучены функции пакета dplyr. Получены практические навыки работы с изученными функциями и датафреймами пакета nycflights13.
