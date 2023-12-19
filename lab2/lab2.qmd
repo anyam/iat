@@ -89,24 +89,24 @@ starwars %>% mutate (bmi = mass / ((height / 100) ^ 2)) %>% select (name, bmi)
 #### 8. Найти 10 самых "вытянутых" персонажей. "Вытянутость" оценить по отношению массы (mass) к росту (height) персонажей.
 
 ```{r}
-starwars %>% mutate (longest = mass / height) %>% arrange (desc (longest)) %>% head (10) %>% select (name, longest)
+starwars %>% mutate (lenght = mass / height) %>% arrange (desc (lenght)) %>% head (10) %>% select (name, lenght)
 ```
 
 #### 9. Найти средний возраст персонажей каждой расы вселенной Звёздных войн
 
 ```{r}
-starwars %>% group_by (species) %>% summarise (mean (birth_year, na.rm = TRUE))
+starwars %>% group_by (species) %>% summarise (average_age = mean (birth_year, na.rm = TRUE))
 ```
 
 #### 10. Найти самый распространённый цвет глаз персонажей вселенной Звёздных войн
 
 ```{r}
-
+starwars %>% count (eye_color) %>% filter (n == max (n))
 ```
 
 #### 11. Подсчитать среднюю длинц имени в каждой расе вселенной Звёздных войн
 
 ```{r}
-
+starwars %>% group_by (species) %>% summarise (name_lenght = mean (nchar (name)))
 ```
 
