@@ -73,9 +73,71 @@ library(nycflights13)
 
 #### 1. Сколько встроенных в пакет nycflights13 датафреймов?
 
+5 датафреймов: airlines, airports, flights, planes, weather
+
 #### 2. Сколько строк в каждом датафрейме?
 
+``` r
+airlines %>% nrow ()
+```
+
+    [1] 16
+
+``` r
+airports %>% nrow ()
+```
+
+    [1] 1458
+
+``` r
+flights %>% nrow ()
+```
+
+    [1] 336776
+
+``` r
+planes %>% nrow ()
+```
+
+    [1] 3322
+
+``` r
+weather %>% nrow ()
+```
+
+    [1] 26115
+
 #### 3. Сколько столбцов в каждом датафрейме?
+
+``` r
+airlines %>% ncol()
+```
+
+    [1] 2
+
+``` r
+airports %>% ncol ()
+```
+
+    [1] 8
+
+``` r
+flights %>% ncol ()
+```
+
+    [1] 19
+
+``` r
+planes %>% ncol ()
+```
+
+    [1] 9
+
+``` r
+weather %>% ncol ()
+```
+
+    [1] 15
 
 #### 4. Как просмотреть примерный вид датафреймов?
 
