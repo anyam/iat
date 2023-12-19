@@ -44,10 +44,20 @@ library(dplyr)
 
 ### Ответы на вопросы
 
-#### Сколько строк в датафрейме?
+#### 1. Сколько строк в датафрейме?
 
 ```{r}
 starwars %>% nrow()
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+#### 2. Сколько столбцов в датафрейме?
+
+```{r}
+starwars %>% ncol()
+```
+#### 3. Как просмотреть примерный вид датафрейма?
+
+```{r}
+starwars %>% glimpse()
+```
+
