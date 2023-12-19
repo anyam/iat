@@ -209,6 +209,43 @@ planes %>% arrange(year) %>% select(tailnum) %>% head(5)
 
 #### 10. Какая средняя температура воздуха была в сентябре в аэропорту John F Kennedy Intl (в градусах Цельсия)?
 
+``` r
+airports %>% filter (name == 'John F Kennedy Intl') 
+```
+
+    # A tibble: 1 × 8
+      faa   name                  lat   lon   alt    tz dst   tzone           
+      <chr> <chr>               <dbl> <dbl> <dbl> <dbl> <chr> <chr>           
+    1 JFK   John F Kennedy Intl  40.6 -73.8    13    -5 A     America/New_York
+
+``` r
+weather %>% filter (origin == 'JFK' & month == 9) %>% 
+  group_by (origin) %>% summarise (ave_tempreture_F = mean (temp, na.rm = TRUE)) %>% mutate(ave_tempreture_C = 5 / 9 * (ave_tempreture_F - 32))
+```
+
+    # A tibble: 1 × 3
+      origin ave_tempreture_F ave_tempreture_C
+      <chr>             <dbl>            <dbl>
+    1 JFK                66.9             19.4
+
 #### 11. Самолёты какой авиакомпании совершили больше всего вылетов в июне?
 
+``` r
+flights %>% group_by (carrier) %>% filter (month == 6) %>%  summarize (flights = n()) %>% arrange (desc (flights)) %>% head (1)
+```
+
+    # A tibble: 1 × 2
+      carrier flights
+      <chr>     <int>
+    1 UA         4975
+
 #### 12. Самолёты какой авиакомпании задерживались чаще других в 2013 году?
+
+``` r
+flights %>% group_by (carrier) %>% filter (year == 2013)  %>% summarize (times = sum (arr_delay > 0, na.rm = TRUE)) %>% arrange (desc (times)) %>% head (1)
+```
+
+    # A tibble: 1 × 2
+      carrier times
+      <chr>   <int>
+    1 EV      24484
