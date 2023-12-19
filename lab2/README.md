@@ -93,3 +93,37 @@ starwars %>% glimpse()
     $ films      <list> <"A New Hope", "The Empire Strikes Back", "Return of the J…
     $ vehicles   <list> <"Snowspeeder", "Imperial Speeder Bike">, <>, <>, <>, "Imp…
     $ starships  <list> <"X-wing", "Imperial shuttle">, <>, <>, "TIE Advanced x1",…
+
+#### 4. Сколько уникальных рас персонажей (species) представлено в данных?
+
+``` r
+starwars %>% select(species) %>% 
+  unique()
+```
+
+    # A tibble: 38 × 1
+       species       
+       <chr>         
+     1 Human         
+     2 Droid         
+     3 Wookiee       
+     4 Rodian        
+     5 Hutt          
+     6 <NA>          
+     7 Yoda's species
+     8 Trandoshan    
+     9 Mon Calamari  
+    10 Ewok          
+    # ℹ 28 more rows
+
+#### 5. Найти самого высокого персонажа.
+
+``` r
+starwars %>% filter(height == max(height, na.rm = TRUE)) %>% 
+  select(name, height)
+```
+
+    # A tibble: 1 × 2
+      name        height
+      <chr>        <int>
+    1 Yarael Poof    264
