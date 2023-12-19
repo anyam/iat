@@ -2,26 +2,66 @@
 ================
 Гренкова Анна БИСО-01-20
 
-## Quarto
+# Основы обработки данных с помощью R с использованием пакета dplyr.
 
-Quarto enables you to weave together content and executable code into a
-finished document. To learn more about Quarto see <https://quarto.org>.
+## Цель работы
 
-## Running Code
+1.  Развить практические навыки использования языка программирования R
+    для обработки данных;
+2.  Закрепить знания базовых типов данных языка R;
+3.  Развить пркатические навыки использования функций обработки данных
+    пакета dplyr – функции `select()`, `filter()`, `mutate()`,
+    `arrange()`, `group_by()`.
 
-When you click the **Render** button a document will be generated that
-includes both content and the output of embedded code. You can embed
-code like this:
+## Исходные данные
+
+1.  ОС Windows 11
+2.  RStudio Desktop
+3.  Интерпретатор языка R 4.3.0
+4.  Пакет `dplyr`
+
+## План
+
+1.  Установить пакет `dplyr`
+2.  Выполнить задания на наборе данных `starwars` и ответить на
+    поставленные вопросы.
+
+## Ход работы
+
+### Шаг 0
+
+Установка пакета `dplyr` с помощью команды `install.packages("dplyr")`.
+
+    install.packages("dplyr")
+
+Подключение пакета к проекту с помощью команды мощью `library(dplyr)`.
 
 ``` r
-1 + 1
+library(dplyr)
 ```
 
-    [1] 2
+    Warning: package 'dplyr' was built under R version 4.3.2
 
-You can add options to executable code like this
 
-    [1] 4
+    Attaching package: 'dplyr'
+
+    The following objects are masked from 'package:stats':
+
+        filter, lag
+
+    The following objects are masked from 'package:base':
+
+        intersect, setdiff, setequal, union
+
+### Ответы на вопросы
+
+#### Сколько строк в датафрейме?
+
+``` r
+starwars %>% nrow()
+```
+
+    [1] 87
 
 The `echo: false` option disables the printing of code (only output is
 displayed).
