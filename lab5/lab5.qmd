@@ -154,6 +154,14 @@ clust <- cluster %>% summarise(Cluster_Start_Time = min (First.time.seen), Clust
 stable <- cluster %>% group_by(Station.MAC, Probed.ESSIDs) %>% summarise(Power = mean(Power)) %>% arrange((Power)) %>% head(1)
 ```
 
+## Оценка результата
+Установлен пакет dplyr. 
+Получены ответы на вопросы задания.
+Проведена работа с использованием функций пакета dplyr.
+Проведён анализ и обработка импортированных данных.
+
+## Вывод
+Изучены функции пакета dplyr. Получены практические навыки работы с изученными функциями.
 
 
 

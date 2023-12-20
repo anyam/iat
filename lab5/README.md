@@ -570,3 +570,14 @@ stable <- cluster %>% group_by(Station.MAC, Probed.ESSIDs) %>% summarise(Power =
 
     `summarise()` has grouped output by 'Station.MAC'. You can override using the
     `.groups` argument.
+
+## Оценка результата
+
+Установлен пакет dplyr. Получены ответы на вопросы задания. Проведена
+работа с использованием функций пакета dplyr. Проведён анализ и
+обработка импортированных данных.
+
+## Вывод
+
+Изучены функции пакета dplyr. Получены практические навыки работы с
+изученными функциями.
