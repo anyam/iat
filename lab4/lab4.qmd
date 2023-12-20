@@ -126,7 +126,11 @@ top %>% head(10)
 топ-10 доменам.
 
 ```{r}
+top_2 <- dns1 %>% filter (tolower (dns1$`query `) %in% top$`query `) %>% arrange (`ts `)
 
+time <- diff (top_2$`ts `)
+
+summary (time)
 ```
 
 #### 6. Часто вредоносное программное обеспечение
@@ -138,8 +142,14 @@ top %>% head(10)
 такие IP адреса в исследуемом датасете?
 
 ```{r}
-
+bad_ip <- dns1 %>% group_by  (ip = tolower (dns1$`id.orig_h`), domain = tolower (dns1$`query `)) %>% summarise (r_count = n ()) %>% filter (r_count > 1)
 ```
+```{r}
+bad <- unique(bad_ip$`ip`)
+
+bad %>% length()
+```
+В исследуемом датасете 240 "опасных" ip-адресов
 
 ### Обогащение данных
 
@@ -147,5 +157,39 @@ top %>% head(10)
 организацию-провайдера для топ-10 доменов.
 
 ```{r}
-
+top %>% head(10)
 ```
+teredo.ipv6.microsoft.com
+IP: 20.112.250.133
+Местоположение: Редмонд, США
+Провайдер: Microsoft
+
+
+tools.google.com
+IP: 172.217.18.14
+Местоположение: Моунтайн-Вью, США
+Провайдер: Google
+
+www.apple.com
+IP: 69.192.160.210
+Местоположение: Франкфурт, Германия
+Провайдер: AKAMAI TECHNOLOGIES
+
+time.apple.com
+IP: 17.253.14.251
+Местоположение: Нью-Йорк, США
+Провайдер: APPLE COMPUTER
+
+safebrowsing.clients.google.com
+IP: 142.250.184.206
+Местоположение: Моунтайн-Вью, США
+Провайдер: Google
+
+44.206.168.192.in-addr.arpa
+IP: 44.206.168.192
+Местоположение: Ашберн, США
+Провайдер: Amazon Technologies Inc.
+
+
+
+

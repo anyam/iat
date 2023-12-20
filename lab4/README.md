@@ -229,6 +229,17 @@ top %>% head(10)
 характеристики (функция summary() ) интервала времени между
 последовательным обращениями к топ-10 доменам.
 
+``` r
+top_2 <- dns1 %>% filter (tolower (dns1$`query `) %in% top$`query `) %>% arrange (`ts `)
+
+time <- diff (top_2$`ts `)
+
+summary (time)
+```
+
+        Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+        0.00     0.00     0.01     0.29     0.15 49669.28 
+
 #### 6. Часто вредоносное программное обеспечение
 
 использует DNS канал в качестве канала управления, периодически
@@ -236,8 +247,61 @@ top %>% head(10)
 периодическим запросам на один и тот же домен можно выявить скрытый DNS
 канал. Есть ли такие IP адреса в исследуемом датасете?
 
+``` r
+bad_ip <- dns1 %>% group_by  (ip = tolower (dns1$`id.orig_h`), domain = tolower (dns1$`query `)) %>% summarise (r_count = n ()) %>% filter (r_count > 1)
+```
+
+    `summarise()` has grouped output by 'ip'. You can override using the `.groups`
+    argument.
+
+``` r
+bad <- unique(bad_ip$`ip`)
+
+bad %>% length()
+```
+
+    [1] 240
+
+В исследуемом датасете 240 “опасных” ip-адресов
+
 ### Обогащение данных
 
 #### Определите местоположение (страну, город) и
 
 организацию-провайдера для топ-10 доменов.
+
+``` r
+top %>% head(10)
+```
+
+    # A tibble: 10 × 2
+       `query `                                                            req_count
+       <chr>                                                                   <int>
+     1 "teredo.ipv6.microsoft.com"                                             39273
+     2 "tools.google.com"                                                      14057
+     3 "www.apple.com"                                                         13390
+     4 "time.apple.com"                                                        13109
+     5 "safebrowsing.clients.google.com"                                       11658
+     6 "*\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x0…     10401
+     7 "WPAD"                                                                   9134
+     8 "44.206.168.192.in-addr.arpa"                                            7247
+     9 "HPE8AA67"                                                               6929
+    10 "ISATAP"                                                                 6569
+
+teredo.ipv6.microsoft.com IP: 20.112.250.133 Местоположение: Редмонд,
+США Провайдер: Microsoft
+
+tools.google.com IP: 172.217.18.14 Местоположение: Моунтайн-Вью, США
+Провайдер: Google
+
+www.apple.com IP: 69.192.160.210 Местоположение: Франкфурт, Германия
+Провайдер: AKAMAI TECHNOLOGIES
+
+time.apple.com IP: 17.253.14.251 Местоположение: Нью-Йорк, США
+Провайдер: APPLE COMPUTER
+
+safebrowsing.clients.google.com IP: 142.250.184.206 Местоположение:
+Моунтайн-Вью, США Провайдер: Google
+
+44.206.168.192.in-addr.arpa IP: 44.206.168.192 Местоположение: Ашберн,
+США Провайдер: Amazon Technologies Inc.
