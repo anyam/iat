@@ -53,7 +53,7 @@ library(dplyr)
 Импорт DNS файла
 
 ``` r
-dns_data <- read.csv ("dns.log", header = FALSE, sep = "\t", encoding = "UTF-8")
+dns <- read.csv ("dns.log", header = FALSE, sep = "\t", encoding = "UTF-8")
 ```
 
 Импорт CSV файла
@@ -65,21 +65,21 @@ header <- read.csv ("header.csv")
 #### Добавление пропущенных данных
 
 ``` r
-colnames(dns_data) <- read.csv("header.csv", header = FALSE, skip = 1)$V1
+colnames(dns) <- read.csv("header.csv", header = FALSE, skip = 1)$V1
 ```
 
 #### Преобразование данных в нужный формат
 
 ``` r
-field_na<-header[,1]
-colnames(dns_data)<-field_na
-dns_data$ts <- as.POSIXct(dns_data$ts, origin="1970-01-01")
+field<-header[,1]
+colnames(dns)<-field
+dns$ts <- as.POSIXct(dns$ts, origin="1970-01-01")
 ```
 
 #### Просмотр общей структуры данных с помощью функции `glimpse ()`
 
 ``` r
-glimpse (dns_data)
+glimpse (dns)
 ```
 
     Rows: 427,935
@@ -115,9 +115,30 @@ glimpse (dns_data)
 
 сети Доброй Организации?
 
+``` r
+member1 <- unique(dns$id.orig_h)
+member2 <- unique(dns$id.resp_h)
+member <- union(member1 , member2)
+member %>% length()
+```
+
+    [1] 0
+
 #### 2.Какое соотношение участников обмена внутри
 
 сети и участников обращений к внешним ресурсам?
+
+``` r
+ip_gen <- c("10.", "100.([6-9]|1[0-1][0-9]|12[0-7]).", "172.((1[6-9])|(2[0-9])|(3[0-1])).", "192.168.")
+ip_in <- member[grep(paste(ip_gen, collapse = "|"), member)]
+count_ip_in <- sum(member %in% ip_in)
+count_ip_ex <- length(member) - count_ip_in
+
+mem_ratio <- count_ip_in / count_ip_ex
+mem_ratio
+```
+
+    [1] NaN
 
 #### 3. Найдите топ-10 участников сети, проявляющих
 
