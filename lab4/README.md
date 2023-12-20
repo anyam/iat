@@ -28,3 +28,83 @@
 ## Ход работы
 
 ### Шаг 0
+
+#### Установка пакета `dplyr` с помощью команды `library(dplyr)`
+
+``` r
+library(dplyr)
+```
+
+    Warning: package 'dplyr' was built under R version 4.3.2
+
+
+    Attaching package: 'dplyr'
+
+    The following objects are masked from 'package:stats':
+
+        filter, lag
+
+    The following objects are masked from 'package:base':
+
+        intersect, setdiff, setequal, union
+
+#### Импорт данных
+
+Импорт DNS файла
+
+``` r
+dns_data <- read.csv ("dns.log", header = FALSE, sep = "\t", encoding = "UTF-8")
+```
+
+Импорт CSV файла
+
+``` r
+header <- read.csv ("header.csv")
+```
+
+#### Добавление пропущенных данных
+
+``` r
+colnames(dns_data) <- read.csv("header.csv", header = FALSE, skip = 1)$V1
+```
+
+#### Преобразование данных в нужный формат
+
+``` r
+field_na<-header[,1]
+colnames(dns_data)<-field_na
+dns_data$ts <- as.POSIXct(dns_data$ts, origin="1970-01-01")
+```
+
+#### Просмотр общей структуры данных с помощью функции `glimpse ()`
+
+``` r
+glimpse (dns_data)
+```
+
+    Rows: 427,935
+    Columns: 24
+    $ `ts `          <dbl> 1331901006, 1331901015, 1331901016, 1331901017, 1331901…
+    $ `uid `         <chr> "CWGtK431H9XuaTN4fi", "C36a282Jljz7BsbGH", "C36a282Jljz…
+    $ `id `          <chr> "192.168.202.100", "192.168.202.76", "192.168.202.76", …
+    $ ``             <int> 45658, 137, 137, 137, 137, 137, 137, 137, 137, 137, 137…
+    $ `proto `       <chr> "192.168.27.203", "192.168.202.255", "192.168.202.255",…
+    $ `trans_id `    <int> 137, 137, 137, 137, 137, 137, 137, 137, 137, 137, 137, …
+    $ `query `       <chr> "udp", "udp", "udp", "udp", "udp", "udp", "udp", "udp",…
+    $ `qclass `      <int> 33008, 57402, 57402, 57402, 57398, 57398, 57398, 62187,…
+    $ `qclass_name ` <chr> "*\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x…
+    $ `qtype `       <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", …
+    $ `qtype_name `  <chr> "C_INTERNET", "C_INTERNET", "C_INTERNET", "C_INTERNET",…
+    $ `rcode `       <chr> "33", "32", "32", "32", "32", "32", "32", "32", "32", "…
+    $ `rcode_name `  <chr> "SRV", "NB", "NB", "NB", "NB", "NB", "NB", "NB", "NB", …
+    $ `QR `          <chr> "0", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", …
+    $ `AA `          <chr> "NOERROR", "-", "-", "-", "-", "-", "-", "-", "-", "-",…
+    $ `TC RD `       <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+    $ `RA `          <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+    $ `Z `           <lgl> FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, …
+    $ `answers `     <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+    $ `TTLs `        <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1…
+    $ `rejected `    <chr> "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", …
+    $ NA             <chr> "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", …
+    $ NA             <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+    $ ts             <dttm> 2012-03-16 16:30:05, 2012-03-16 16:30:15, 2012-03-16 1…
