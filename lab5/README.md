@@ -2,26 +2,51 @@
 ================
 Гренкова Анна БИСО-01-20
 
-## Quarto
+# Исследование информации о состоянии беспроводных сетей
 
-Quarto enables you to weave together content and executable code into a
-finished document. To learn more about Quarto see <https://quarto.org>.
+## Цель работы
 
-## Running Code
+1.  Получить знания о методах исследования радиоэлектронной обстановки.
+2.  Составить представление о механизмах работы Wi-Fi сетей на канальном
+    и сетевом уровне модели OSI.
+3.  Закрепить практические навыки использования языка программирования
+    для обработки данных
+4.  Закрепить знания основных функций обработки данных экосистемы
+    `tidyverse` языка R
 
-When you click the **Render** button a document will be generated that
-includes both content and the output of embedded code. You can embed
-code like this:
+## Исходные данные
+
+1.  ОС Windows 11
+2.  RStudio Desktop
+3.  Интерпретатор языка R 4.3.0
+4.  Файл `mir.csv-01.csv`
+
+## План
+
+1.  Импортировать данные из файла `mir.csv-01.csv`
+2.  Провести анализ точек доступа
+3.  Провести анализ данных клиенто.
+4.  Выполнить задания.
+
+## Ход работы
+
+### Шаг 0
+
+#### Установка пакета `dplyr` с помощью команды `library(dplyr)`
 
 ``` r
-1 + 1
+library(dplyr)
 ```
 
-    [1] 2
+    Warning: package 'dplyr' was built under R version 4.3.2
 
-You can add options to executable code like this
 
-    [1] 4
+    Attaching package: 'dplyr'
 
-The `echo: false` option disables the printing of code (only output is
-displayed).
+    The following objects are masked from 'package:stats':
+
+        filter, lag
+
+    The following objects are masked from 'package:base':
+
+        intersect, setdiff, setequal, union
