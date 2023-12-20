@@ -50,3 +50,36 @@ library(dplyr)
     The following objects are masked from 'package:base':
 
         intersect, setdiff, setequal, union
+
+#### Импорт данных
+
+``` r
+mir <- read.csv("mir.csv-01.csv", nrows = 167)
+```
+
+``` r
+mir2 <- read.csv("mir.csv-01.csv", skip = 169)
+```
+
+#### Преобразование данных
+
+``` r
+mir <- mir %>%  mutate_at(vars(BSSID, Privacy, Cipher, Authentication, LAN.IP, ESSID), trimws) %>% mutate_at(vars(BSSID, Privacy, Cipher, Authentication, LAN.IP, ESSID), na_if, "") %>% mutate_at(vars(First.time.seen, Last.time.seen), as.POSIXct, format = "%Y-%m-%d %H:%M:%S")
+```
+
+``` r
+mir2 <- mir2 %>% 
+  mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), trimws) %>%
+  mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), na_if, "")
+
+mir2 <- mir2 %>% mutate_at(vars(First.time.seen, Last.time.seen), as.POSIXct, format = "%Y-%m-%d %H:%M:%S") %>% mutate_at(vars(Power, X..packets), as.integer) %>% filter(!is.na(BSSID))
+```
+
+    Warning: There were 2 warnings in `mutate()`.
+    The first warning was:
+    ℹ In argument: `Power = .Primitive("as.integer")(Power)`.
+    Caused by warning:
+    ! NAs introduced by coercion
+    ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.
+
+### Анализ данных
