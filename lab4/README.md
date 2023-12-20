@@ -270,23 +270,53 @@ top %>% head(10)
      9 "HPE8AA67"                                                               6929
     10 "ISATAP"                                                                 6569
 
-teredo.ipv6.microsoft.com IP: 20.112.250.133 Местоположение: Редмонд,
-США Провайдер: Microsoft
+teredo.ipv6.microsoft.com
 
-tools.google.com IP: 172.217.18.14 Местоположение: Моунтайн-Вью, США
+IP: 20.112.250.133
+
+Местоположение: Редмонд, США
+
+Провайдер: Microsoft
+
+##### tools.google.com
+
+IP: 172.217.18.14
+
+Местоположение: Моунтайн-Вью, США
+
 Провайдер: Google
 
-www.apple.com IP: 69.192.160.210 Местоположение: Франкфурт, Германия
+www.apple.com
+
+IP: 69.192.160.210
+
+Местоположение: Франкфурт, Германия
+
 Провайдер: AKAMAI TECHNOLOGIES
 
-time.apple.com IP: 17.253.14.251 Местоположение: Нью-Йорк, США
+time.apple.com
+
+IP: 17.253.14.251
+
+Местоположение: Нью-Йорк, США
+
 Провайдер: APPLE COMPUTER
 
-safebrowsing.clients.google.com IP: 142.250.184.206 Местоположение:
-Моунтайн-Вью, США Провайдер: Google
+safebrowsing.clients.google.com
 
-44.206.168.192.in-addr.arpa IP: 44.206.168.192 Местоположение: Ашберн,
-США Провайдер: Amazon Technologies Inc.
+IP: 142.250.184.206
+
+Местоположение: Моунтайн-Вью, США
+
+Провайдер: Google
+
+44.206.168.192.in-addr.arpa
+
+IP: 44.206.168.192
+
+Местоположение: Ашберн, США
+
+Провайдер: Amazon Technologies Inc.
 
 ## Оценка результата
 
