@@ -2,26 +2,29 @@
 ================
 Гренкова Анна БИСО-01-20
 
-## Quarto
+### Цель работы
 
-Quarto enables you to weave together content and executable code into a
-finished document. To learn more about Quarto see <https://quarto.org>.
+1.  Зекрепить практические навыки использования языка программирования R
+    для обработки данных
+2.  Закрепить знания основных функций обработки данных экосистемы
+    tidyverse языка R
+3.  Закрепить навыки исследования метаданных DNS трафика
 
-## Running Code
+## Исходные данные
 
-When you click the **Render** button a document will be generated that
-includes both content and the output of embedded code. You can embed
-code like this:
+1.  ОС Windows 11
+2.  RStudio Desktop
+3.  Интерпретатор языка R 4.3.0
+4.  Пакет `dplyr`
+5.  файл dns.log
+6.  файл header.csv
 
-``` r
-1 + 1
-```
+## План
 
-    [1] 2
+1.  Установить пакет `dplyr`
+2.  Импортировать данные DNS
+3.  Выполнить задания.
 
-You can add options to executable code like this
+## Ход работы
 
-    [1] 4
-
-The `echo: false` option disables the printing of code (only output is
-displayed).
+### Шаг 0
