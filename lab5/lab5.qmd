@@ -93,19 +93,28 @@ mir %>% filter (grepl ("WPA3", Privacy)) %>% select(BSSID, ESSID, Privacy)
 ##### 4.Отсортировать точки доступа по интервалу времени, в течение которого они находились на связи, по убыванию.
 
 ```{r}
+sort <- mir %>%  mutate(Activity_Interval = Last.time.seen - First.time.seen)
 
+
+sort2 <- sort %>% arrange (desc (Activity_Interval)) %>% select (BSSID, First.time.seen, Last.time.seen, Activity_Interval)
+
+sort2
 ```
 
 ##### 5. Обнаружить топ-10 самых быстрых точек доступа.
 
 ```{r}
-
+fast <- mir %>% arrange (desc(Speed)) %>% select (BSSID, Speed, Privacy, ESSID) %>% head (10)
 ```
 
 ##### 6. Отсортировать точки доступа по частоте отправки запросов (beacons) в единицу времени по их убыванию.
 
 ```{r}
+freq <- sort %>% mutate (beacon_rate = round (as.double (X..beacons) / as.integer (Activity_Interval), digits = 2)) %>% filter(!is.infinite(beacon_rate) & !is.na(beacon_rate))
 
+freq %>%  arrange(desc(beacon_rate)) %>% select(BSSID, Privacy, ESSID, beacon_rate) %>% filter(beacon_rate != 0)
+
+freq %>% head
 ```
 
 #### Данные клиентов
