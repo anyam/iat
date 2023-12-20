@@ -122,26 +122,37 @@ freq %>% head
 ##### 1. Определить производителя для каждого обнаруженного устройства
 
 ```{r}
-
+mir2 %>% filter (grepl ("(..:..:..:)(..:..:..)", BSSID)) %>% distinct (BSSID)
 ```
-
++   00:03:7F Atheros Communications, Inc.
++   00:0D:97 Hitachi Energy USA Inc.
++   00:23:EB Cisco Systems, Inc
++   00:25:00 Apple, Inc.
++   00:26:99 Cisco Systems, Inc
++   DC:09:4C Huawei Technologies Co.,Ltd
 
 ##### 2. Обнаружить устройства, которые НЕ рандомизируют свой MAC адрес
 
 
 ```{r}
-
+mir2 %>% filter (grepl ("(..:..:..:)(..:..:..)", BSSID) & !is.na (Probed.ESSIDs)) %>% select (BSSID, Probed.ESSIDs) %>% group_by (BSSID, Probed.ESSIDs) %>% filter (n() > 1) %>% arrange (BSSID) %>% unique()
 ```
 
 
 ##### 3.  Кластеризовать запросы от устройств к точкам доступа по их именам. Определить время появления устройства в зоне радиовидимости и время выхода его из нее.
 
 ```{r}
+cluster <- mir2 %>% filter (!is.na(Probed.ESSIDs)) %>% group_by (Station.MAC, Probed.ESSIDs) %>% arrange (First.time.seen)
 
+clust <- cluster %>% summarise(Cluster_Start_Time = min (First.time.seen), Cluster_End_Time = max(Last.time.seen), Total_Power = sum(Power))
 ```
 
 
 ##### 4. Оценить стабильность уровня сигнала внури кластера во времени. Выявить наиболее стабильный кластер.
+
+```{r}
+stable <- cluster %>% group_by(Station.MAC, Probed.ESSIDs) %>% summarise(Power = mean(Power)) %>% arrange((Power)) %>% head(1)
+```
 
 
 

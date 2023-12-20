@@ -437,8 +437,136 @@ freq %>% head
 
 ##### 1. Определить производителя для каждого обнаруженного устройства
 
+``` r
+mir2 %>% filter (grepl ("(..:..:..:)(..:..:..)", BSSID)) %>% distinct (BSSID)
+```
+
+                   BSSID
+    1  BE:F1:71:D5:17:8B
+    2  BE:F1:71:D6:10:D7
+    3  1E:93:E3:1B:3C:F4
+    4  E8:28:C1:DC:FF:F2
+    5  00:25:00:FF:94:73
+    6  00:26:99:F2:7A:E2
+    7  0C:80:63:A9:6E:EE
+    8  E8:28:C1:DD:04:52
+    9  0A:C5:E1:DB:17:7B
+    10 9A:75:A8:B9:04:1E
+    11 8A:A3:03:73:52:08
+    12 4A:EC:1E:DB:BF:95
+    13 BE:F1:71:D5:0E:53
+    14 08:3A:2F:56:35:FE
+    15 6E:C7:EC:16:DA:1A
+    16 2A:E8:A2:02:01:73
+    17 E8:28:C1:DC:B2:52
+    18 E8:28:C1:DC:C6:B2
+    19 E8:28:C1:DC:C8:32
+    20 56:C5:2B:9F:84:90
+    21 9A:9F:06:44:24:5B
+    22 12:48:F9:CF:58:8E
+    23 E8:28:C1:DD:04:50
+    24 AA:F4:3F:EE:49:0B
+    25 3A:70:96:C6:30:2C
+    26 E8:28:C1:DC:3C:92
+    27 8E:55:4A:85:5B:01
+    28 5E:C7:C0:E4:D7:D4
+    29 E2:37:BF:8F:6A:7B
+    30 96:FF:FC:91:EF:64
+    31 CE:B3:FF:84:45:FC
+    32 00:26:99:BA:75:80
+    33 76:70:AF:A4:D2:AF
+    34 E8:28:C1:DC:B2:50
+    35 00:AB:0A:00:10:10
+    36 E8:28:C1:DC:C8:30
+    37 8E:1F:94:96:DA:FD
+    38 E8:28:C1:DB:F5:F2
+    39 E8:28:C1:DD:04:40
+    40 EA:7B:9B:D8:56:34
+    41 BE:FD:EF:18:92:44
+    42 7E:3A:10:A7:59:4E
+    43 00:26:99:F2:7A:E1
+    44 00:23:EB:E3:49:31
+    45 E8:28:C1:DC:B2:40
+    46 E0:D9:E3:49:04:40
+    47 3A:DA:00:F9:0C:02
+    48 E8:28:C1:DC:B2:41
+    49 E8:28:C1:DE:74:32
+    50 E8:28:C1:DC:33:12
+    51 92:F5:7B:43:0B:69
+    52 DC:09:4C:32:34:9B
+    53 E8:28:C1:DC:F0:90
+    54 E0:D9:E3:49:04:52
+    55 22:C9:7F:A9:BA:9C
+    56 E8:28:C1:DD:04:41
+    57 92:12:38:E5:7E:1E
+    58 B2:1B:0C:67:0A:BD
+    59 E8:28:C1:DC:33:10
+    60 E0:D9:E3:49:04:41
+    61 1E:C2:8E:D8:30:91
+    62 A2:64:E8:97:58:EE
+    63 A6:02:B9:73:2F:76
+    64 A6:02:B9:73:81:47
+    65 AE:3E:7F:C8:BC:8E
+    66 B6:C4:55:B5:53:24
+    67 86:DF:BF:E4:2F:23
+    68 02:67:F1:B0:6C:98
+    69 36:46:53:81:12:A0
+    70 E8:28:C1:DC:0B:B0
+    71 82:CD:7D:04:17:3B
+    72 E8:28:C1:DC:54:B2
+    73 00:03:7F:10:17:56
+    74 00:0D:97:6B:93:DF
+
+-   00:03:7F Atheros Communications, Inc.
+-   00:0D:97 Hitachi Energy USA Inc.
+-   00:23:EB Cisco Systems, Inc
+-   00:25:00 Apple, Inc.
+-   00:26:99 Cisco Systems, Inc
+-   DC:09:4C Huawei Technologies Co.,Ltd
+
 ##### 2. Обнаружить устройства, которые НЕ рандомизируют свой MAC адрес
+
+``` r
+mir2 %>% filter (grepl ("(..:..:..:)(..:..:..)", BSSID) & !is.na (Probed.ESSIDs)) %>% select (BSSID, Probed.ESSIDs) %>% group_by (BSSID, Probed.ESSIDs) %>% filter (n() > 1) %>% arrange (BSSID) %>% unique()
+```
+
+    # A tibble: 16 × 2
+    # Groups:   BSSID, Probed.ESSIDs [16]
+       BSSID             Probed.ESSIDs   
+       <chr>             <chr>           
+     1 00:26:99:BA:75:80 GIVC            
+     2 00:26:99:F2:7A:E2 GIVC            
+     3 0C:80:63:A9:6E:EE KOTIKI_XXX      
+     4 1E:93:E3:1B:3C:F4 Galaxy A71      
+     5 6E:C7:EC:16:DA:1A Cnet            
+     6 8E:55:4A:85:5B:01 Vladimir        
+     7 AA:F4:3F:EE:49:0B Redmi Note 8 Pro
+     8 BE:F1:71:D5:17:8B C322U13 3965    
+     9 E8:28:C1:DC:B2:50 MIREA_HOTSPOT   
+    10 E8:28:C1:DC:B2:50 MIREA_GUESTS    
+    11 E8:28:C1:DC:B2:52 MIREA_HOTSPOT   
+    12 E8:28:C1:DC:C6:B2 MIREA_HOTSPOT   
+    13 E8:28:C1:DC:F0:90 MIREA_GUESTS    
+    14 E8:28:C1:DD:04:40 MIREA_HOTSPOT   
+    15 E8:28:C1:DD:04:52 MIREA_HOTSPOT   
+    16 E8:28:C1:DE:74:32 MIREA_HOTSPOT   
 
 ##### 3. Кластеризовать запросы от устройств к точкам доступа по их именам. Определить время появления устройства в зоне радиовидимости и время выхода его из нее.
 
+``` r
+cluster <- mir2 %>% filter (!is.na(Probed.ESSIDs)) %>% group_by (Station.MAC, Probed.ESSIDs) %>% arrange (First.time.seen)
+
+clust <- cluster %>% summarise(Cluster_Start_Time = min (First.time.seen), Cluster_End_Time = max(Last.time.seen), Total_Power = sum(Power))
+```
+
+    `summarise()` has grouped output by 'Station.MAC'. You can override using the
+    `.groups` argument.
+
 ##### 4. Оценить стабильность уровня сигнала внури кластера во времени. Выявить наиболее стабильный кластер.
+
+``` r
+stable <- cluster %>% group_by(Station.MAC, Probed.ESSIDs) %>% summarise(Power = mean(Power)) %>% arrange((Power)) %>% head(1)
+```
+
+    `summarise()` has grouped output by 'Station.MAC'. You can override using the
+    `.groups` argument.
