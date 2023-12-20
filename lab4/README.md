@@ -270,7 +270,7 @@ top %>% head(10)
      9 "HPE8AA67"                                                               6929
     10 "ISATAP"                                                                 6569
 
-teredo.ipv6.microsoft.com
+##### teredo.ipv6.microsoft.com
 
 IP: 20.112.250.133
 
@@ -286,7 +286,7 @@ IP: 172.217.18.14
 
 Провайдер: Google
 
-www.apple.com
+##### www.apple.com
 
 IP: 69.192.160.210
 
@@ -294,7 +294,7 @@ IP: 69.192.160.210
 
 Провайдер: AKAMAI TECHNOLOGIES
 
-time.apple.com
+##### time.apple.com
 
 IP: 17.253.14.251
 
@@ -302,7 +302,7 @@ IP: 17.253.14.251
 
 Провайдер: APPLE COMPUTER
 
-safebrowsing.clients.google.com
+##### safebrowsing.clients.google.com
 
 IP: 142.250.184.206
 
@@ -310,7 +310,7 @@ IP: 142.250.184.206
 
 Провайдер: Google
 
-44.206.168.192.in-addr.arpa
+##### 44.206.168.192.in-addr.arpa
 
 IP: 44.206.168.192
 
