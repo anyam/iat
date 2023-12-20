@@ -35,13 +35,16 @@ format:
 
 ```{r}
 library(dplyr)
+library(readr)
 ```
 
 #### Импорт данных
 
 Импорт DNS файла
 ```{r}
-dns1 <- read.csv ("dns.log", header = FALSE, sep = "\t", encoding = "UTF-8")
+dns2 <- read_delim("dns.log", col_names = FALSE, delim = "\t")
+dns1 <- head((dns2), n = nrow(dns2) - 2)
+dns1
 ```
 
 
@@ -55,26 +58,21 @@ header <- read.csv ("header.csv")
 #### Добавление пропущенных данных
 
 ```{r}
-colnames(dns1) <- read.csv("header.csv", header = FALSE, skip = 1)$V1
+colnames (dns1) <- read.csv ("header.csv", header = FALSE, skip = 1)$V1
 ```
 
 
 #### Преобразование данных в нужный формат
 
 ```{r}
-field<-header[,1]
-colnames(dns1)<-field
-dns1$ts <- as.POSIXct(dns1$ts, origin="1970-01-01")
+field <- header [,1]
+colnames (dns1) <- field
 ```
-
-
-
-
 
 #### Просмотр общей структуры данных с помощью функции `glimpse ()`
 
 ```{r}
-dns1 %>% glimpse()
+dns1 %>% glimpse ()
 ```
 
 ### Ответы на вопросы
@@ -83,10 +81,10 @@ dns1 %>% glimpse()
 сети Доброй Организации?
 
 ```{r}
-member1 <- unique(dns1$`id.orig_h`)
-member2 <- unique(dns1$`id.resp_h`)
-member <- union(member1 , member2)
-member %>% length()
+member1 <- unique (dns1$`id.orig_h`)
+member2 <- unique (dns1$`id.resp_h`)
+member <- union (member1 , member2)
+member %>% length ()
 ```
 
 #### 2.Какое соотношение участников обмена внутри
@@ -94,23 +92,22 @@ member %>% length()
 ресурсам?
 
 ```{r}
-ip_gen <- c("10.", "100.([6-9]|1[0-1][0-9]|12[0-7]).", "172.((1[6-9])|(2[0-9])|(3[0-1])).", "192.168.")
-ip_in <- member[grep(paste(ip_gen, collapse = "|"), member)]
-count_ip_in <- sum(member %in% ip_in)
-count_ip_ex <- length(member) - count_ip_in
+ip_gen <- c ("10.", "100.([6-9]|1[0-1][0-9]|12[0-7]).", "172.((1[6-9])|(2[0-9])|(3[0-1])).", "192.168.")
+ip_in <- member [grep (paste (ip_gen, collapse = "|"), member)]
+count_ip_in <- sum (member %in% ip_in)
+count_ip_ex <- length (member) - count_ip_in
 
 mem_ratio <- count_ip_in / count_ip_ex
 mem_ratio
-```
-```{r}
-
 ```
 
 #### 3. Найдите топ-10 участников сети, проявляющих
 наибольшую сетевую активность
 
 ```{r}
+top_10 <- dns1 %>% group_by (id.orig_h) %>% summarise (activ = n ()) %>% arrange(desc (activ))
 
+top_10 %>% head(10)
 ```
 
 #### 4. Найдите топ-10 доменов, к которым обращаются
@@ -118,7 +115,9 @@ mem_ratio
 обращений
 
 ```{r}
+top <- dns1 %>% group_by (`query `) %>% summarise (req_count = n ()) %>% arrange (desc (req_count)) 
 
+top %>% head(10)
 ```
 
 #### 5. Опеределите базовые статистические
