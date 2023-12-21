@@ -1,1 +1,934 @@
+Практика 1
+================
+Гренкова Анна БИСО-01-20
 
+## Основы обработки данных с помощью R с использованием tidyverse
+
+### Цель работы
+
+1.  Познакомится с синтаксисом языка программирования R
+2.  Познакомиться с пакетом `swirl`
+3.  Оформить отчет
+
+## Исходные данные
+
+1.  ОС Windows 11
+2.  RStudio Desktop
+3.  Интерпретатор языка R 4.3.0
+4.  Пакет `swirl`
+
+## План
+
+1.  Установить библиотеку `swirl`
+2.  Запустить в консоли `swirl::swirl()`
+3.  Пройти 4 урока по языку программирования R
+
+## Ход работы
+
+### 1. Установка пакета swirl с помощью команды install.packages(“swirl”)
+
+### 2. Запуск задания с помощью команды swirl::swirl()
+
+    swirl::swirl()
+
+Welcome to swirl! Please sign in. If you’ve been here before, use the
+same name as you did then. If you are new, call  
+yourself something unique.
+
+Thanks, Ann. Let’s cover a couple of quick housekeeping items before we
+begin our first lesson. First of all, you should know  
+that when you see ‘…’, that means you should press Enter when you are
+done reading and ready to continue.
+
+    ...  <-- Thats your cue to press Enter to continue
+
+Also, when you see ‘ANSWER:’, the R prompt (\>), or when you are asked
+to select from a list, that means it’s your turn to  
+enter a response, then press Enter to continue.
+
+Select 1, 2, or 3 and press Enter
+
+1: Continue. 2: Proceed. 3: Let’s get going!
+
+    Selection: 3
+
+You can exit swirl and return to the R prompt (\>) at any time by
+pressing the Esc key. If you are already at the prompt, type  
+bye() to exit and save your progress. When you exit properly, you’ll see
+a short message letting you know you’ve done so.
+
+When you are at the R prompt (\>):  
+– Typing skip() allows you to skip the current question.  
+– Typing play() lets you experiment with R on your own; swirl will
+ignore what you do…  
+– UNTIL you type nxt() which will regain swirl’s attention.  
+– Typing bye() causes swirl to exit. Your progress will be saved.  
+– Typing main() returns you to swirl’s main menu.  
+– Typing info() displays these options again.
+
+Let’s get started!
+
+    ...
+
+To begin, you must install a course. I can install a course for you from
+the internet, or I can send you to a web page  
+(https://github.com/swirldev/swirl_courses) which will provide course
+options and directions for installing courses yourself.  
+(If you are not connected to the internet, type 0 to exit.)
+
+1: R Programming: The basics of programming in R 2: Regression Models:
+The basics of regression modeling in R 3: Statistical Inference: The
+basics of statistical inference in R 4: Exploratory Data Analysis: The
+basics of exploring data in R 5: Don’t install anything for me. I’ll do
+it myself.
+
+    Selection: 1
+
+|======================================================================================================================|
+100%
+
+Course installed successfully!
+
+Please choose a course, or type 0 to exit swirl.
+
+1: R Programming 2: Take me to the swirl course repository!
+
+    Selection: 1
+
+Please choose a lesson, or type 0 to return to course menu.
+
+1: Basic Building Blocks 2: Workspace and Files 3: Sequences of Numbers
+4: Vectors  
+5: Missing Values 6: Subsetting Vectors 7: Matrices and Data Frames 8:
+Logic  
+9: Functions 10: lapply and sapply 11: vapply and tapply 12: Looking at
+Data  
+13: Simulation 14: Dates and Times 15: Base Graphics
+
+    Selection: 1
+
+| | 0%
+
+In this lesson, we will explore some basic building blocks of the R
+programming language.
+
+    ...
+
+|=== | 3% | If at any point you’d like more information on a particular
+topic related to R, you can type help.start() at the prompt, | which
+will open a menu of resources (either within RStudio or your default web
+browser, depending on your setup). | Alternatively, a simple web search
+often yields the answer you’re looking for.
+
+    ...
+
+|====== | 5% | In its simplest form, R can be used as an interactive
+calculator. Type 5 + 7 and press Enter.
+
+``` r
+5 + 7
+```
+
+    [1] 12
+
+You are doing so well!
+
+|========= | 8% | R simply prints the result of 12 by default. However,
+R is a programming language and often the reason we use a programming |
+language as opposed to a calculator is to automate some process or avoid
+unnecessary repetition.
+
+    ...
+
+|============ | 11% | In this case, we may want to use our result from
+above in a second calculation. Instead of retyping 5 + 7 every time we
+need | it, we can just create a new variable that stores the result.
+
+    ...
+
+|================ | 13% | The way you assign a value to a variable in R
+is by using the assignment operator, which is just a ‘less than’ symbol
+| followed by a ‘minus’ sign. It looks like this: \<-
+
+    ...
+
+|=================== | 16% | Think of the assignment operator as an
+arrow. You are assigning the value on the right side of the arrow to the
+variable name | on the left side of the arrow.
+
+    ...
+
+|====================== | 18% | To assign the result of 5 + 7 to a new
+variable called x, you type x \<- 5 + 7. This can be read as ‘x gets 5
+plus 7’. Give it | a try now.
+
+``` r
+x <- 5 + 7
+```
+
+Excellent job!
+
+|========================= | 21% | You’ll notice that R did not print
+the result of 12 this time. When you use the assignment operator, R
+assumes that you don’t | want to see the result immediately, but rather
+that you intend to use the result for something else later on.
+
+    ...
+
+|============================ | 24% | To view the contents of the
+variable x, just type x and press Enter. Try it now.
+
+``` r
+x
+```
+
+    [1] 12
+
+That’s a job well done!
+
+|=============================== | 26% | Now, store the result of x - 3
+in a new variable called y.
+
+``` r
+y <- x - 3
+```
+
+That’s the answer I was looking for.
+
+|================================== | 29% | What is the value of y? Type
+y to find out.
+
+``` r
+ y
+```
+
+    [1] 9
+
+You got it right!
+
+|===================================== | 32% | Now, let’s create a small
+collection of numbers called a vector. Any object that contains data is
+called a data structure and | numeric vectors are the simplest type of
+data structure in R. In fact, even a single number is considered a
+vector of length | one.
+
+    ...
+
+|======================================== | 34% | The easiest way to
+create a vector is with the c() function, which stands for ‘concatenate’
+or ‘combine’. To create a vector | containing the numbers 1.1, 9, and
+3.14, type c(1.1, 9, 3.14). Try it now and store the result in a
+variable called z.
+
+``` r
+z <- c(1.1, 9, 3.14)
+```
+
+Keep working like that and you’ll get there!
+
+|=========================================== | 37% | Anytime you have
+questions about a particular function, you can access R’s built-in help
+files via the `?` command. For | example, if you want more information
+on the c() function, type ?c without the parentheses that normally
+follow a function | name. Give it a try.
+
+``` r
+?c
+```
+
+    starting httpd help server ... done
+
+Perseverance, that’s the answer.
+
+|=============================================== | 39% | Type z to view
+its contents. Notice that there are no commas separating the values in
+the output.
+
+``` r
+ z
+```
+
+    [1] 1.10 9.00 3.14
+
+Nice work!
+
+|================================================== | 42% | You can
+combine vectors to make a new vector. Create a new vector that contains
+z, 555, then z again in that order. Don’t | assign this vector to a new
+variable, so that we can just see the result immediately.
+
+``` r
+ c(z, 555, z)
+```
+
+    [1]   1.10   9.00   3.14 555.00   1.10   9.00   3.14
+
+Excellent job!
+
+|===================================================== | 45% | Numeric
+vectors can be used in arithmetic expressions. Type the following to see
+what happens: z \* 2 + 100.
+
+``` r
+z * 2 + 100
+```
+
+    [1] 102.20 118.00 106.28
+
+You got it right!
+
+|======================================================== | 47% | First,
+R multiplied each of the three elements in z by 2. Then it added 100 to
+each element to get the result you see above.
+
+    ...
+
+|=========================================================== | 50% |
+Other common arithmetic operators are `+`, `-`, `/`, and `^` (where x^2
+means ‘x squared’). To take the square root, use the | sqrt() function
+and to take the absolute value, use the abs() function.
+
+    ...
+
+|============================================================== | 53% |
+Take the square root of z - 1 and assign it to a new variable called
+my_sqrt.
+
+``` r
+my_sqrt <- sqrt(z-1)
+```
+
+Your dedication is inspiring!
+
+|================================================================= | 55%
+| Before we view the contents of the my_sqrt variable, what do you think
+it contains?
+
+1: a single number (i.e a vector of length 1) 2: a vector of length 3 3:
+a vector of length 0 (i.e. an empty vector)
+
+    Selection: 2
+
+Great job!
+
+|==================================================================== |
+58% | Print the contents of my_sqrt.
+
+``` r
+my_sqrt
+```
+
+    [1] 0.3162278 2.8284271 1.4628739
+
+You’re the best!
+
+|=======================================================================
+| 61% | As you may have guessed, R first subtracted 1 from each element
+of z, then took the square root of each element. This leaves | you with
+a vector of the same length as the original vector z.
+
+    ...
+
+|===========================================================================
+| 63% | Now, create a new variable called my_div that gets the value of
+z divided by my_sqrt.
+
+``` r
+my_div <- z / my_sqrt
+```
+
+You are doing so well!
+
+|==============================================================================
+| 66% | Which statement do you think is true?
+
+1: my_div is a single number (i.e a vector of length 1) 2: The first
+element of my_div is equal to the first element of z divided by the
+first element of my_sqrt, and so on… 3: my_div is undefined
+
+    Selection: 2
+
+That’s correct!
+
+|=================================================================================
+| 68% | Go ahead and print the contents of my_div.
+
+``` r
+my_div
+```
+
+    [1] 3.478505 3.181981 2.146460
+
+All that hard work is paying off!
+
+|====================================================================================
+| 71% | When given two vectors of the same length, R simply performs the
+specified arithmetic operation (`+`, `-`, `*`, etc.) |
+element-by-element. If the vectors are of different lengths, R
+‘recycles’ the shorter vector until it is the same length as | the
+longer vector.
+
+    ...
+
+|=======================================================================================
+| 74% | When we did z \* 2 + 100 in our earlier example, z was a vector
+of length 3, but technically 2 and 100 are each vectors of | length 1.
+
+    ...
+
+|==========================================================================================
+| 76% | Behind the scenes, R is ‘recycling’ the 2 to make a vector of 2s
+and the 100 to make a vector of 100s. In other words, when | you ask R
+to compute z \* 2 + 100, what it really computes is this: z \* c(2, 2,
+2) + c(100, 100, 100).
+
+    ...
+
+|=============================================================================================
+| 79% | To see another example of how this vector ‘recycling’ works, try
+adding c(1, 2, 3, 4) and c(0, 10). Don’t worry about saving | the result
+in a new variable.
+
+``` r
+ c(1, 2, 3, 4) + c(0, 10)
+```
+
+    [1]  1 12  3 14
+
+All that practice is paying off!
+
+|================================================================================================
+| 82% | If the length of the shorter vector does not divide evenly into
+the length of the longer vector, R will still apply the | ‘recycling’
+method, but will throw a warning to let you know something fishy might
+be going on.
+
+    ...
+
+|===================================================================================================
+| 84% | Try c(1, 2, 3, 4) + c(0, 10, 100) for an example.
+
+``` r
+ c(1, 2, 3, 4) + c(0, 10, 100)
+```
+
+    Warning in c(1, 2, 3, 4) + c(0, 10, 100): longer object length is not a
+    multiple of shorter object length
+
+    [1]   1  12 103   4
+
+Warning message: In c(1, 2, 3, 4) + c(0, 10, 100) : longer object length
+is not a multiple of shorter object length
+
+You got it!
+
+|======================================================================================================
+| 87% | Before concluding this lesson, I’d like to show you a couple of
+time-saving tricks.
+
+    ...
+
+|==========================================================================================================
+| 89% | Earlier in the lesson, you computed z \* 2 + 100. Let’s pretend
+that you made a mistake and that you meant to add 1000 instead | of 100.
+You could either re-type the expression, or…
+
+    ...
+
+|=============================================================================================================
+| 92% | In many programming environments, the up arrow will cycle
+through previous commands. Try hitting the up arrow on your | keyboard
+until you get to this command (z \* 2 + 100), then change 100 to 1000
+and hit Enter. If the up arrow doesn’t work for | you, just type the
+corrected command.
+
+``` r
+z * 2 + 1000
+```
+
+    [1] 1002.20 1018.00 1006.28
+
+Excellent work!
+
+|================================================================================================================
+| 95% | Finally, let’s pretend you’d like to view the contents of a
+variable that you created earlier, but you can’t seem to remember | if
+you named it my_div or myDiv. You could try both and see what works, or…
+
+    ...
+
+|===================================================================================================================
+| 97% | You can type the first two letters of the variable name, then
+hit the Tab key (possibly more than once). Most programming |
+environments will provide a list of variables that you’ve created that
+begin with ‘my’. This is called auto-completion and | can be quite handy
+when you have many variables in your workspace. Give it a try. (If
+auto-completion doesn’t work for you, | just type my_div and press
+Enter.)
+
+``` r
+my_div
+```
+
+    [1] 3.478505 3.181981 2.146460
+
+All that hard work is paying off!
+
+|======================================================================================================================|
+100% | Would you like to receive credit for completing this course on
+Coursera.org?
+
+1: Yes 2: No
+
+    Selection: 2
+
+You got it right!
+
+You’ve reached the end of this lesson! Returning to the main menu…
+
+Please choose a course, or type 0 to exit swirl.
+
+1: R Programming 2: Take me to the swirl course repository!
+
+    Selection: 2
+
+OK. I’m opening the swirl courses web page in your browser.
+
+### 2. Workspace and Files
+
+Determine which directory your R session is using as its current working
+directory using getwd().
+
+``` r
+getwd()
+```
+
+    [1] "D:/Документы/захарчук/iat/lab1"
+
+List all the objects in your local workspace using ls()
+
+``` r
+ls()
+```
+
+    [1] "my_div"  "my_sqrt" "x"       "y"       "z"      
+
+Assign 9 to x using x \<- 9.
+
+``` r
+x <- 9
+```
+
+Now take a look at objects that are in your workspace using ls().
+
+``` r
+ls()
+```
+
+    [1] "my_div"  "my_sqrt" "x"       "y"       "z"      
+
+List all the files in your working directory using list.files()
+
+``` r
+list.files()
+```
+
+    [1] "gggg.qmd"       "gggg.rmarkdown" "lab1..qmd"      "lab1.qmd"      
+    [5] "mytest2.R"      "mytest3.R"      "README.md"      "testdir"       
+    [9] "testdir2"      
+
+or dir().
+
+``` r
+dir()
+```
+
+    [1] "gggg.qmd"       "gggg.rmarkdown" "lab1..qmd"      "lab1.qmd"      
+    [5] "mytest2.R"      "mytest3.R"      "README.md"      "testdir"       
+    [9] "testdir2"      
+
+As we go through this lesson, you should be examining the help page for
+each new function. Check out the help page for list.files with the
+command ?list.files.
+
+``` r
+?list.files
+```
+
+Using the args() function on a function name is also a handy way to see
+what arguments a function can take.
+
+``` r
+args(list.files)
+```
+
+    function (path = ".", pattern = NULL, all.files = FALSE, full.names = FALSE, 
+        recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, 
+        no.. = FALSE) 
+    NULL
+
+Assign the value of the current working directory to a variable called
+“old.dir”.
+
+``` r
+old.dir <- getwd()
+```
+
+Use dir.create() to create a directory in the current working directory
+called “testdir”.
+
+``` r
+dir.create("testdir")
+```
+
+    Warning in dir.create("testdir"): 'testdir' already exists
+
+Set your working directory to “testdir” with the setwd() command.
+
+``` r
+setwd("testdir")
+```
+
+Create a file in your working directory called “mytest.R” using the
+file.create() function.
+
+``` r
+file.create("mytest.R")
+```
+
+    [1] TRUE
+
+This should be the only file in this newly created directory. Let’s
+check this by listing all the files in the current directory.
+
+``` r
+list.files()
+```
+
+     [1] "gggg.qmd"       "gggg.rmarkdown" "lab1..qmd"      "lab1.qmd"      
+     [5] "mytest.R"       "mytest2.R"      "mytest3.R"      "README.md"     
+     [9] "testdir"        "testdir2"      
+
+Check to see if “mytest.R” exists in the working directory using the
+file.exists() function.
+
+``` r
+file.exists("mytest.R")
+```
+
+    [1] TRUE
+
+Access information about the file “mytest.R” by using file.info().
+
+``` r
+file.info("mytest.R")
+```
+
+             size isdir mode               mtime               ctime
+    mytest.R    0 FALSE  666 2023-12-22 00:56:53 2023-12-22 00:56:53
+                           atime exe
+    mytest.R 2023-12-22 00:56:53  no
+
+Change the name of the file “mytest.R” to “mytest2.R” by using
+file.rename().
+
+``` r
+file.rename("mytest.R", "mytest2.R")
+```
+
+    [1] TRUE
+
+Make a copy of “mytest2.R” called “mytest3.R” using file.copy().
+
+``` r
+file.copy("mytest2.R", "mytest3.R")
+```
+
+    [1] FALSE
+
+Provide the relative path to the file “mytest3.R” by using file.path().
+
+``` r
+file.path("mytest3.R")
+```
+
+    [1] "mytest3.R"
+
+You can use file.path to construct file and directory paths that are
+independent of the operating system your R code is running on. Pass
+‘folder1’ and ‘folder2’ as arguments to file.path to make a
+platform-independent pathname.
+
+``` r
+file.path("folder1", "folder2")
+```
+
+    [1] "folder1/folder2"
+
+Create a directory in the current working directory called “testdir2”
+and a subdirectory for it called “testdir3”, all in one command by using
+dir.create() and file.path().
+
+``` r
+dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
+```
+
+    Warning in dir.create(file.path("testdir2", "testdir3"), recursive = TRUE):
+    'testdir2\testdir3' already exists
+
+Go back to your original working directory using setwd(). (Recall that
+we created the variable old.dir with the full path for the orginal
+working directory at the start of these questions.)
+
+``` r
+setwd(old.dir)
+```
+
+### 3. Sequences of Numbers
+
+The simplest way to create a sequence of numbers in R is by using the
+`:` operator. Type 1:20 to see how it works.
+
+``` r
+1:20
+```
+
+     [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+
+That gave us every integer between (and including) 1 and 20. We could
+also use it to create a sequence of real numbers. For example, try
+pi:10.
+
+``` r
+pi:10
+```
+
+    [1] 3.141593 4.141593 5.141593 6.141593 7.141593 8.141593 9.141593
+
+What happens if we do 15:1? Give it a try to find out.
+
+``` r
+15:1
+```
+
+     [1] 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1
+
+Remember that if you have questions about a particular R function, you
+can access its documentation with a question mark followed by the
+function name: ?function_name_here. However, in the case of an operator
+like the colon used above, you must enclose the symbol in backticks like
+this: ?`:`. (NOTE: The backtick (\`) key is generally located in the top
+left corner of a keyboard, above the Tab key. If you don’t have a
+backtick key, you can use regular quotes.)
+
+``` r
+?':'
+```
+
+The most basic use of seq() does exactly the same thing as the `:`
+operator. Try seq(1, 20) to see this.
+
+``` r
+seq(1, 20)
+```
+
+     [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+
+This gives us the same output as 1:20. However, let’s say that instead
+we want a vector of numbers ranging from 0 to 10, incremented by 0.5.
+seq(0, 10, by=0.5) does just that. Try it out.
+
+``` r
+seq(0, 10, by=0.5)
+```
+
+     [1]  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0
+    [16]  7.5  8.0  8.5  9.0  9.5 10.0
+
+Or maybe we don’t care what the increment is and we just want a sequence
+of 30 numbers between 5 and 10. seq(5, 10, length=30) does the trick.
+Give it a shot now and store the result in a new variable called my_seq.
+
+``` r
+my_seq <- seq(5, 10, length=30)
+```
+
+To confirm that my_seq has length 30, we can use the length() function.
+Try it now.
+
+``` r
+length(my_seq)
+```
+
+    [1] 30
+
+There are several ways we could do this. One possibility is to combine
+the `:` operator and the length() function like this: 1:length(my_seq).
+Give that a try.
+
+``` r
+1:length(my_seq)
+```
+
+     [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+    [26] 26 27 28 29 30
+
+Another option is to use seq(along.with = my_seq). Give that a try.
+
+``` r
+seq(along.with = my_seq)
+```
+
+     [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+    [26] 26 27 28 29 30
+
+However, as is the case with many common tasks, R has a separate
+built-in function for this purpose called seq_along(). Type
+seq_along(my_seq) to see it in action.
+
+``` r
+seq_along(my_seq)
+```
+
+     [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+    [26] 26 27 28 29 30
+
+If we’re interested in creating a vector that contains 40 zeros, we can
+use rep(0, times = 40). Try it out.
+
+``` r
+rep(0, times = 40)
+```
+
+     [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    [39] 0 0
+
+If instead we want our vector to contain 10 repetitions of the vector
+(0, 1, 2), we can do rep(c(0, 1, 2), times = 10). Go ahead.
+
+``` r
+rep(c(0, 1, 2), times = 10)
+```
+
+     [1] 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2
+
+Finally, let’s say that rather than repeating the vector (0, 1, 2) over
+and over again, we want our vector to contain 10 zeros, then 10 ones,
+then 10 twos. We can do this with the `each` argument. Try rep(c(0, 1,
+2), each = 10).
+
+``` r
+rep(c(0, 1, 2), each = 10)
+```
+
+     [1] 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
+
+### 4. Vectors
+
+First, create a numeric vector num_vect that contains the values 0.5,
+55, -10, and 6.
+
+``` r
+num_vect <- c(0.5, 55, -10, 6)
+```
+
+Now, create a variable called tf that gets the result of num_vect \< 1,
+which is read as ‘num_vect is less than 1’.
+
+``` r
+tf <- num_vect < 1
+tf
+```
+
+    [1]  TRUE FALSE  TRUE FALSE
+
+Let’s try another. Type num_vect \>= 6 without assigning the result to a
+new variable.
+
+``` r
+num_vect >= 6
+```
+
+    [1] FALSE  TRUE FALSE  TRUE
+
+Create a character vector that contains the following words: “My”,
+“name”, “is”. Remember to enclose each word in its own set of double
+quotes, so that R knows they are character strings. Store the vector in
+a variable called my_char.
+
+``` r
+my_char <- c("My", "name", "is")
+my_char
+```
+
+    [1] "My"   "name" "is"  
+
+Type paste(my_char, collapse = ” “) now. Make sure there’s a space
+between the double quotes in the `collapse` argument. You’ll see why in
+a second.
+
+``` r
+paste(my_char, collapse = " ")
+```
+
+    [1] "My name is"
+
+To add (or ‘concatenate’) your name to the end of my_char, use the c()
+function like this: c(my_char, “your_name_here”). Place your name in
+double quotes where I’ve put “your_name_here”. Try it now, storing the
+result in a new variable called my_name.
+
+``` r
+my_name <- c(my_char, "Georgy")
+my_name
+```
+
+    [1] "My"     "name"   "is"     "Georgy"
+
+Now, use the paste() function once more to join the words in my_name
+together into a single character string. Don’t forget to say collapse =
+” “!
+
+``` r
+paste(my_name, collapse = " ")
+```
+
+    [1] "My name is Georgy"
+
+In the simplest case, we can join two character vectors that are each of
+length 1 (i.e. join two words). Try paste(“Hello”,“world!”, sep = ” “),
+where the `sep` argument tells R that we want to separate the joined
+elements with a single space.
+
+``` r
+paste("Hello", "world!", sep = " ")
+```
+
+    [1] "Hello world!"
+
+For a slightly more complicated example, we can join two vectors, each
+of length 3. Use paste() to join the integer vector 1:3 with the
+character vector c(“X”, “Y”, “Z”). This time, use sep = “” to leave no
+space between the joined elements.
+
+``` r
+paste(1:3, c("X", "Y", "Z"), sep = "")
+```
+
+    [1] "1X" "2Y" "3Z"
+
+``` r
+paste(LETTERS, 1:4, sep = "-")
+```
+
+     [1] "A-1" "B-2" "C-3" "D-4" "E-1" "F-2" "G-3" "H-4" "I-1" "J-2" "K-3" "L-4"
+    [13] "M-1" "N-2" "O-3" "P-4" "Q-1" "R-2" "S-3" "T-4" "U-1" "V-2" "W-3" "X-4"
+    [25] "Y-1" "Z-2"
+
+## Оценка работы
+
+Пройдены 4 базовых курса по языку R.
+
+## Вывод
+
+Получены базовые навыки владения языком R
